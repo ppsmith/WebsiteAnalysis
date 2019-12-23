@@ -20,27 +20,27 @@ def downLoadfromdict(path):
 
         reader = csv.reader(csv_file)  #creates a reader to read the cile opened above
 
-        for entry in reader:
-            if entry is None:
+        for entry in reader:  #for each row in the dict
+            if entry is None:  #ensure that row exists
                 return
-            http = PoolManager()
+            http = PoolManager()  #start a pool manager
             s = ""
-            s = s.join(entry)
+            s = s.join(entry)  #s is a string version of the entry in the csv row
             entry = s
             print(entry)
-            data = http.request('GET', entry)
+            data = http.request('GET', entry)  #request the webpage
 
-            newAddress = entry.replace('/', '')
+            newAddress = entry.replace('/', '')  #remove the slashes from the website url
 
-            newAddress = newAddress.strip('https://')
+            newAddress = newAddress.strip('https://')  #remove the beggining of the url
 
-            filepath = 'C:\\Users\\ppsmith\\seekingAlphaData\\' + newAddress + '.txt'
+            filepath = 'C:\\Users\\ppsmith\\seekingAlphaData\\dirtyData\\' + newAddress + '.txt'  #make a new file path
 
-            file = open(filepath, 'w+')
-            dataText = str(data.data)
-            file.write(entry)
-            file.write('\n')
-            file.write(dataText)
+            file = open(filepath, 'w+')  #open new file
+            dataText = str(data.data)  #turn the data from the website into a string
+            file.write(entry)  #write the address the data is from into the first entry of the csv
+            file.write('\n')  #write a newline
+            file.write(dataText)  #write the website data into the file
     except:
         e = sys.exc_info()[0]
         return e
@@ -54,7 +54,7 @@ def downLoadfromLink(link, path):
 
         newAddress = newAddress.strip('https://')
 
-        filepath = 'C:\\Users\\ppsmith\\seekingAlphaData\\' + newAddress + '.txt'
+        filepath = 'C:\\Users\\ppsmith\\seekingAlphaData\\dirtyData\\' + newAddress + '.txt'
 
         file = open(filepath, 'w+')
         dataText = str(data.data)
