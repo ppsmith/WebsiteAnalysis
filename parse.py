@@ -1,12 +1,12 @@
 import re
 from sys import exc_info
 import bs4
+import addFromPage
 
 goodTags = ['p', 'span']
 
-def parseSoup(source):
+def parseSoup(source, cleanRoot, dirtyRoot, addOthers = 0):
     try:
-        myString = ''
         with open(source) as file:
             dirtyData = file.read()
             soup = bs4.BeautifulSoup(dirtyData, 'html.parser')
@@ -20,11 +20,12 @@ def parseSoup(source):
 
             path = str(source)  # start to make the file name for the clean file
             path = path.replace('\\', '')  # remove the slashes from the file name so that is is a clean file
-            newAddress = path.replace('C:UsersppsmithseekingAlphaDatadirtyData', '')
-            cleanFile = "C:\\Users\\ppsmith\\seekingAlphaData\\cleanData\\" + newAddress  # cleanFile is the file path of the clean data.
+            dirtyRoot = dirtyRoot.replace('\\', '')
+            newAddress = path.replace(dirtyRoot, '')
+            cleanFile = cleanRoot + newAddress  # cleanFile is the file path of the clean data.
             cleanFile = str(cleanFile)
 
-            with open(cleanFile, 'w+') as destination:
+            with open(cleanFile, 'a+') as destination:
                 for tag in goodTags:  #for each good tag in the list,
                     add = soup(tag)
                     for entry in add:
@@ -38,28 +39,7 @@ def parseSoup(source):
 
 
 
-def parse(source):
-    try:
-        with open(source) as file:
-            dirtyData = file.read()  #opening the dirty data
 
-        path = str(source)  #start to make the file name for the clean file
-        path = path.replace('\\', '')  #remove the slashes from the file name so that is is a clean file
-        newAddress = path.replace('C:UsersppsmithseekingAlphaDatadirtyData', '')
-        cleanFile = "C:\\Users\\ppsmith\\seekingAlphaData\\cleanData\\" + newAddress  #cleanFile is the file path of the clean data.
-
-        cleanFile = str(cleanFile)
-
-        with open(cleanFile, 'w+') as destination:
-            s = re.sub('<[^<]+?>', '', str(dirtyData))  #s is the dirty data without html tags
-            s = s.replace('\\n', '')  #reomve the new line tags from the file
-            s = s.replace('{', '')
-            s = s.replace('}', '')
-            destination.write(s)  #write the parsed text into the destination dile
-        return 0
-    except:
-        e = exc_info()[0]
-        return e
 
 
 
