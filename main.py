@@ -5,7 +5,7 @@ import addFromPage
 
 entries = os.listdir('C:\\Users\\ppsmith\\seekingAlphaData\\dirtyData\\')  #get the files in the dirty directory
 dirtyRoot = 'C:\\Users\\ppsmith\\seekingAlphaData\\dirtyData\\'
-cleanRoot = 'C:\\users\\ppsmith\\seekingAlphadata\\cleanData\\'  
+cleanRoot = 'C:\\users\\ppsmith\\seekingAlphadata\\cleanData\\'
 
 dict = 'C:\\Users\\ppsmith\\seekingAlphaData\\dict.csv'  #path for the main dictionary of website urls
 
