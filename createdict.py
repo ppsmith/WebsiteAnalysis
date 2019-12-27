@@ -1,6 +1,5 @@
 import csv
 
-
 class create:
     def __init__(self, path):
         self.__url = ["https://www.nytimes.com/section/business/economy", "https://www.nytimes.com/section/business/", "https://nyt.com/", "https://www.wsj.com/", "https://www.wsj.com/news/world",
