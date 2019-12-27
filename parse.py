@@ -5,7 +5,7 @@ import addFromPage
 
 goodTags = ['p', 'span']
 
-def parseSoup(source, cleanRoot, dirtyRoot, addOthers = 0):
+def parseSoup(source, cleanRoot, dirtyRoot, addOthers = 0): 
     try:
         with open(source) as file:
             dirtyData = file.read()
